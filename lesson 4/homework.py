@@ -1,15 +1,15 @@
-# holder = {} 
+holder = {} 
 animals = ["dog", "cat","bird", "cat", "dog", "cat"]
-# for i in range(len(animals)):
-#     cat = animals[i]
+for i in range(len(animals)):
+    cat = animals[i]
 
-#     if cat in holder:
-#         holder[cat]+=1
+    if cat in holder:
+        holder[cat]+=1
 
-#     else:
-#         holder[cat]=1
+    else:
+        holder[cat]=1
 
-#     print(holder)
+    print(holder)
 
 # print(holder["cat"])
 # cats = 0
@@ -20,21 +20,25 @@ animals = ["dog", "cat","bird", "cat", "dog", "cat"]
 #         animals[i] = "boy"
 # print(animals)
 
-word = "apple"
 
-dash = ["_","_","_","_","_"]
+# word = "apple"
 
-print(dash)
+# dahs = ["_"]*len(word)
 
-print(" ".join(dash))
+# # for i in range(len(word)):
+# #     dahs.append("_")
 
-for i in range(5):
-    guess = input("guess a letter")
+# print(dash)
 
-    for i in range(len(word)):
-        if word[i] == guess:
-            dash[i] = guess
-    print(" ".join(dash))
+# print(" ".join(dash))
+
+# for i in range(5):
+#     guess = input("guess a letter")
+
+#     for i in range(len(word)):
+#         if word[i] == guess:
+#             dash[i] = guess
+#     print(" ".join(dash))
 
 
 
