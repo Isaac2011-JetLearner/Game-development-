@@ -5,6 +5,7 @@ HEIGHT = 500
 
 stars = ["red-star.png","green-star.png"]
 actor_stars = [ ]
+animation = [ ]
 
 
 gap = WIDTH/3
@@ -14,9 +15,16 @@ for i in range(len(stars)):
     actor_stars.append(star)
     star.pos = gap*(i+1),20
 
-for star in actor_stars:
-    animate(star,duration = 7,y = HEIGHT+15)
+def animate_star():
+    for star in actor_stars:
+        ani = animate(star,duration = 7,y = HEIGHT+15)
+        animation.append(ani)
 
+def stop_animation():
+    for ani in animation:
+        ani.stop()
+
+animate_star()
 
 def draw():
     screen.blit("space.png",(0,0))
@@ -25,9 +33,13 @@ def draw():
 
 
 def on_mouse_down(pos):
+    global animation
     for i in range(len(actor_stars)):
         if actor_stars[i].collidepoint(pos):
-            actor_stars[i].y = 20
+            stop_animation()
+            animation = [ ]
+            animate_star()
+            
         
 
 def update():
