@@ -17,6 +17,8 @@ green_ball.pos = (0,0)
 change_x = 2
 change_y = 2
 
+score = 0
+
 
 
 def draw():
@@ -25,7 +27,7 @@ def draw():
     green_ball.draw()
 
 def update():
-    global change_y,change_x
+    global change_y,change_x,score
 
     if keyboard.left:
         blue_slab.x-=5
@@ -41,28 +43,15 @@ def update():
     
     green_ball.x+=change_x
     green_ball.y+=change_y
-
-    if green_ball.y > HEIGHT or green_ball.y < 0 :
-        change_y*=-1
-
-    if green_ball.x > WIDTH or green_ball.x < 0:
-        change_x*=-1
-
     
+    if green_ball.colliderect(blue_slab):
+        change_y*=-1
+        change_x*=-1
+        score+=1
 
-
-    # animate(green_ball,duration = 20, y= 400)
-
-    # if green_ball.pos >= (400,250):
-    #     green_ball.x-=6
-    #     green_ball.y-=6
-    #     animate(green_ball,duration = 5, y= 50)
-
+ 
+    if green_ball.y > HEIGHT :
         
-
-
-
-
 
 
 pgzrun.go()
