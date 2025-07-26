@@ -1,24 +1,35 @@
 import pgzrun
+import random
 
 WIDTH = 800
 HEIGHT = 500
 
-stars = ["red-star.png","green-star.png"]
+stars = ["red-star.png","green-star.png","orange-star.png","purple-star.png","yellow-star.png","blue-star.png"]
 actor_stars = [ ]
 animation = [ ]
 
+level = 1
+gap = WIDTH/(level+2)
 
-gap = WIDTH/3
-
-for i in range(len(stars)):
-    star = Actor(stars[i])
+for i in range(level):
+    chosen_star = random.choice(stars)
+    star = Actor(chosen_star)
     actor_stars.append(star)
-    star.pos = gap*(i+1),20
+
+green_star = Actor("green-star.png")   
+
+actor_stars.append(green_star)
+
+random.shuffle(actor_stars)
+
+for i in range(len(actor_stars)):
+    actor_stars[i].pos = gap*(i+1),20
 
 def animate_star():
-    for star in actor_stars:
-        ani = animate(star,duration = 7,y = HEIGHT+15)
+    for i in range(len(actor_stars)):
+        ani = animate(actor_stars[i],duration = 7,y = HEIGHT+15)
         animation.append(ani)
+        
 
 def stop_animation():
     for ani in animation:
@@ -38,6 +49,8 @@ def on_mouse_down(pos):
         if actor_stars[i].collidepoint(pos):
             stop_animation()
             animation = [ ]
+            for i in range(len(actor_stars)):
+                actor_stars[i].pos = gap*(i+1),20
             animate_star()
             
         
