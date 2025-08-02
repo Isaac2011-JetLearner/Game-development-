@@ -21,6 +21,7 @@ jerry.pos = random.randint(50,450),random.randint(50,450)
 
 
 
+
 def draw ():
     screen.blit("background",(0,0))
     cat.draw()

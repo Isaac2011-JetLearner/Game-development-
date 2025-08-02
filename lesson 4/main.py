@@ -2,7 +2,7 @@ import pgzrun
 import random
 from time import time
 
-WIDHT = 500
+WIDTH= 500
 HEIGHT = 500
 satalites = []
 start_cords = [ ]
