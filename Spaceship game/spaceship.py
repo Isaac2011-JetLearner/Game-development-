@@ -50,8 +50,14 @@ def update():
  if keyboard.left:
    spaceship.x-=5
 
+ if spaceship.x >=625:
+   spaceship.x = 625
+
+ if spaceship.x <=20:
+    spaceship.x = 20
+
  if keyboard.right:
-  spaceship.x+=5
+    spaceship.x+=5
 
  laser.y-=4
 

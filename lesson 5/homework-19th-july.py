@@ -28,7 +28,7 @@ def draw():
     
     else:
         screen.fill("green")
-        screen.draw.text("game ovre", center=(WIDTH // 2, HEIGHT // 2), fontsize=50, color="white")
+        screen.draw.text("game over", center=(WIDTH // 2, HEIGHT // 2), fontsize=50, color="white")
 
 def update():
     global change_y, change_x, score, game_over
