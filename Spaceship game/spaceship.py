@@ -1,10 +1,21 @@
 import pgzrun
 import random
 WIDTH = 650
-HIGTH = 500
+HEIGTH = 500
 
 score = 0
 Lives = 3
+
+x = 20
+
+lasers = []
+wasps = []
+
+for i in range(6):
+  wasp = Actor("wasp")
+  wasp.pos = x,25
+  x+=60
+  wasps.append(wasp)
 
 game_over = False
 
@@ -12,21 +23,19 @@ spaceship = Actor("spaceship")
 
 spaceship.pos = (325,475)
 
-wasp = Actor("wasp")
 
-wasp.pos = random.randint(0,600),25
 
-laser = Actor("laser")
-
-laser.pos = spaceship.pos
 
 
 def draw():
  if not game_over:
     screen.blit("spacebackground",(0,0))
     spaceship.draw()
-    wasp.draw()
-    laser.draw()
+    
+    for wasp in wasps:
+      wasp.draw()
+    for laser in lasers:
+      laser.draw()
 
     screen.draw.text("Score: " + str(score),(10,10), fontsize = 30 , color = "white")
     screen.draw.text("Lives: " + str(Lives),(560,10), fontsize = 30 , color = "white")
@@ -34,18 +43,21 @@ def draw():
  elif game_over:
   screen.blit("greenspace",(0,0))
   screen.draw.text("Score: " + str(score),(325,250), fontsize = 30 , color = "white")
-  screen.draw.text("Gameover",(325,200), fontsize = 30 , color = "white")
+  screen.draw.text("GAME OVER",(325,200), fontsize = 30 , color = "white")
   screen.draw.text("Lives: " + str(Lives),(325,300), fontsize = 30 , color = "white")
   
 
 
 
 def update():
- global wasp,spaceship,laser,score,game_over,Lives
- 
- wasp.y+=2.5
- if wasp.y > 475:
-  wasp.y = 25
+ global spaceship,score,game_over,Lives
+ if game_over:
+   return
+ for wasp in wasps:
+   wasp.y+=2.5
+   if wasp.y > 475:
+      wasp.y = 25
+      wasp.x = random.randint(0,600)
 
  if keyboard.left:
    spaceship.x-=5
@@ -59,31 +71,39 @@ def update():
  if keyboard.right:
     spaceship.x+=5
 
- laser.y-=4
+ for laser in lasers:
+   laser.y-=4
 
- if laser.y <= 30:
-  laser.x = spaceship.x
-  laser.y = spaceship.y
-  
-
- if laser.colliderect(wasp):
-  wasp.pos = random.randint(0,600),25
-  laser.pos = spaceship.pos
-  score+=1
-
- if wasp.colliderect(spaceship):
-  Lives-=1
- 
- if Lives == 0:
-  game_over = True
-
-
-
-
- pass
-
+   if laser.y <= 0:
+      lasers.remove(laser)
+   
+ for laser in lasers:
+   for wasp in wasps:
+      if laser.colliderect(wasp):
+            wasps.remove(wasp)
+            lasers.remove(laser)
+            score+=1
+            break
+ for wasp in wasps:
+   if wasp.colliderect(spaceship):
+      wasps.remove(wasp)
+      if wasp.y == 500:
+        Lives-=1
+        break
+   if Lives == 0:
+      game_over = True
 
 
+
+
+
+def on_key_down():
+  if keyboard.space:
+   laser = Actor("laser")
+
+   laser.pos = spaceship.pos
+
+   lasers.append(laser)
 
 
 
