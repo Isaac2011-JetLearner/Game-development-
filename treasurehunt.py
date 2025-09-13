@@ -9,38 +9,35 @@ def treause_place():
         row = ["-"]*4
         treasure.append(row)
 
+def draw_tr():
     for row in treasure:
         print(" ".join(row) )
 
 treause_place()
 
-row_guess = int(input("enter a row number (0-3): "))
-coloum_guess = int(input("enter a coloum number (0-3): "))
 
-
-if tr_row < row_guess:
-    print("hint: go up")
-
-elif tr_row > row_guess:
-    print("hint: go down")
-
-
-if tr_coloum < coloum_guess:
-    print("hint: go right")
-
-elif tr_coloum > coloum_guess: 
-    print("hint: go left")
-
-if row_guess != tr_row and coloum_guess != tr_coloum:
+while True:
+    draw_tr()
     row_guess = int(input("enter a row number (0-3): "))
     coloum_guess = int(input("enter a coloum number (0-3): "))
+    treasure[row_guess][coloum_guess] = "x"
 
-elif row_guess != tr_row or coloum_guess != tr_coloum:
-    row_guess = int(input("enter a row number (0-3): "))
-    coloum_guess = int(input("enter a coloum number (0-3): "))
+    if tr_row < row_guess:
+        print("hint: go up")
 
-if row_guess == tr_row and coloum_guess == tr_coloum:
-    print("Congratulations you have found the Treasure")
+    elif tr_row > row_guess:
+        print("hint: go down")
 
+
+    if tr_coloum < coloum_guess:
+        print("hint: go left")
+
+    elif tr_coloum > coloum_guess: 
+        print("hint: go right ")
+
+    if row_guess == tr_row and coloum_guess == tr_coloum:
+        print("Congratulations you have found the Treasure")
+        draw_tr()
+        break
 
 
